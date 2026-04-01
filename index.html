@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>萬寶隆空間設計 — 數位廣告行銷策略提案</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0b0a;
+    --bg-elevated: #161412;
+    --bg-card: #1c1a17;
+    --gold: #c9a96e;
+    --gold-light: #e2cc9c;
+    --gold-dim: rgba(201, 169, 110, 0.12);
+    --gold-glow: rgba(201, 169, 110, 0.3);
+    --text: #ede8e0;
+    --text-secondary: #9a9590;
+    --text-muted: #5e5955;
+    --border: rgba(201, 169, 110, 0.1);
+    --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #a0814a 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  nav a {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover, nav a.active {
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold-glow);
+    transform: scale(1.5);
+  }
+
+  /* ── Sections ── */
+  section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    section { padding: 3rem 1.5rem; }
+    nav { right: 0.8rem; }
+  }
+
+  /* ── Reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ════════ PAGE 1: COVER ════════ */
+  #cover {
+    flex-direction: column;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 40%, rgba(201, 169, 110, 0.06) 0%, transparent 70%), var(--bg);
+  }
+
+  .cover-collab {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 3rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .cover-brand {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .cover-brand .gold { color: var(--gold); }
+
+  .cover-type {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    letter-spacing: 4px;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+
+  .cover-line {
+    width: 60px; height: 1px;
+    background: var(--gradient-gold);
+    margin: 0 auto 2rem;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+
+  .cover-by {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    animation: fadeUp 0.8s ease 0.6s both;
+  }
+  .cover-by span { color: var(--gold); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ════════ PAGE 2: 前提 ════════ */
+  .page-inner {
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    line-height: 1.4;
+  }
+
+  .premise-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .premise-card:hover { border-color: rgba(201, 169, 110, 0.25); }
+
+  .premise-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gradient-gold);
+    border-radius: 12px 0 0 12px;
+  }
+
+  .premise-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
+  }
+
+  .premise-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .premise-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ════════ PAGE 3: KPI ════════ */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+  }
+
+  .kpi-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .kpi-box:hover {
+    border-color: rgba(201, 169, 110, 0.25);
+    transform: translateY(-3px);
+  }
+
+  .kpi-box.primary { border-top: 2px solid var(--gold); }
+  .kpi-box.secondary { border-top: 2px solid var(--text-muted); }
+
+  .kpi-badge {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .kpi-box.secondary .kpi-badge { color: var(--text-muted); }
+
+  .kpi-item {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+  }
+
+  .kpi-item:last-child { margin-bottom: 0; }
+
+  /* ════════ PAGE 4: 預算 × 渠道 ════════ */
+  .channel-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .channel-row { grid-template-columns: 1fr; }
+  }
+
+  .channel-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .channel-card:hover {
+    border-color: rgba(201, 169, 110, 0.25);
+    transform: translateY(-3px);
+  }
+
+  .channel-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gradient-gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .channel-card:hover::after { opacity: 1; }
+
+  .channel-percent {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .channel-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+
+  .channel-strategy {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .strategy-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .tag-primary {
+    background: var(--gold-dim);
+    color: var(--gold);
+  }
+
+  .tag-secondary {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-secondary);
+  }
+
+  /* ════════ PAGE 5: 主題配置 ════════ */
+  .theme-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .theme-row { grid-template-columns: 1fr; }
+  }
+
+  .theme-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+
+  .theme-card:hover {
+    border-color: rgba(201, 169, 110, 0.25);
+    transform: translateY(-3px);
+  }
+
+  .theme-percent {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .theme-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .theme-channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .theme-ch {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+  }
+
+  .ch-google { background: rgba(66, 133, 244, 0.15); color: #7baaf7; }
+  .ch-meta { background: rgba(66, 103, 178, 0.15); color: #7b9bd8; }
+  .ch-line { background: rgba(6, 199, 85, 0.15); color: #4dd88a; }
+
+  /* ════════ PAGE 6: 時間排期 ════════ */
+  .timeline {
+    position: relative;
+    margin-top: 2.5rem;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--text-muted));
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+  }
+
+  .tl-item:last-child { margin-bottom: 0; }
+
+  .tl-dot {
+    position: absolute;
+    left: -2rem;
+    top: 0.3rem;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--gold);
+  }
+
+  .tl-item:last-child .tl-dot {
+    background: var(--gold);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+
+  .tl-week {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .tl-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .tl-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .tl-budget-bar {
+    margin-top: 0.8rem;
+    height: 6px;
+    background: var(--bg-elevated);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .tl-budget-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--gradient-gold);
+    transition: width 1s ease;
+  }
+
+  /* ════════ PAGE 7: CTA ════════ */
+  #cta {
+    flex-direction: column;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201, 169, 110, 0.05) 0%, transparent 70%), var(--bg);
+  }
+
+  .cta-slogan {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+
+  .cta-slogan .thin {
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  .cta-divider {
+    width: 50px; height: 1px;
+    background: var(--gradient-gold);
+    margin: 0 auto 2rem;
+  }
+
+  .cta-company {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .cta-name {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  /* ── Large screens ── */
+  @media (min-width: 1200px) {
+    .cover-brand { font-size: 4.5rem; }
+    .cover-type { font-size: 1.5rem; }
+    .cover-collab { font-size: 1rem; }
+    .section-title { font-size: 2.6rem; }
+    .premise-title { font-size: 1.3rem; }
+    .premise-desc { font-size: 1.1rem; }
+    .kpi-item { font-size: 1.15rem; }
+    .channel-percent { font-size: 3.2rem; }
+    .channel-name { font-size: 1.3rem; }
+    .channel-strategy { font-size: 0.95rem; }
+    .strategy-tag { font-size: 0.8rem; }
+    .theme-percent { font-size: 2.8rem; }
+    .theme-name { font-size: 1.3rem; }
+    .tl-title { font-size: 1.3rem; }
+    .tl-desc { font-size: 1.05rem; }
+    .cta-slogan { font-size: 2.6rem; }
+    .cta-company { font-size: 1.2rem; }
+  }
+
+  @media (min-width: 1600px) {
+    .cover-brand { font-size: 5rem; }
+    .section-title { font-size: 3rem; }
+    .premise-title { font-size: 1.5rem; }
+    .premise-desc { font-size: 1.2rem; }
+    .channel-percent { font-size: 3.6rem; }
+    .theme-percent { font-size: 3.2rem; }
+    .tl-title { font-size: 1.5rem; }
+    .tl-desc { font-size: 1.15rem; }
+    .cta-slogan { font-size: 3rem; }
+  }
+
+  /* ── Print ── */
+  @media print {
+    html { scroll-snap-type: none; }
+    section { min-height: auto; page-break-after: always; padding: 2rem; }
+    nav { display: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#cover" class="active"></a>
+  <a href="#premise"></a>
+  <a href="#kpi"></a>
+  <a href="#budget"></a>
+  <a href="#themes"></a>
+  <a href="#timeline"></a>
+  <a href="#cta"></a>
+</nav>
+
+<!-- ════════ COVER ════════ -->
+<section id="cover">
+  <div class="cover-collab">Strategy Proposal</div>
+  <h1 class="cover-brand">
+    <span class="gold">萬寶隆</span>空間設計<br>數位廣告行銷策略
+  </h1>
+  <div class="cover-type">Digital Advertising Strategy</div>
+  <div class="cover-line"></div>
+  <div class="cover-by">Presented by <span>簡單廣告營銷</span></div>
+</section>
+
+<!-- ════════ 前提 ════════ -->
+<section id="premise">
+  <div class="page-inner reveal">
+    <div class="section-label">Premise</div>
+    <h2 class="section-title">執行前提</h2>
+
+    <div class="premise-card">
+      <div class="premise-num">01</div>
+      <div class="premise-title">第一週確認追蹤代碼完整性</div>
+      <div class="premise-desc">確認 GTM、GA4、Meta Pixel、CAPI、LINE Tag 等追蹤架構的完整串接，確保所有轉換事件正確觸發，為後續數據分析建立可靠基礎。</div>
+    </div>
+
+    <div class="premise-card">
+      <div class="premise-num">02</div>
+      <div class="premise-title">以前期數據為基準，進行優劣對比評估</div>
+      <div class="premise-desc">蒐集並整理現有廣告帳戶與網站流量數據，作為執行後的成效比較基準，所有優化決策皆以數據驅動。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ KPI ════════ -->
+<section id="kpi">
+  <div class="page-inner reveal">
+    <div class="section-label">Key Performance Indicators</div>
+    <h2 class="section-title">KPI 定義</h2>
+
+    <div class="kpi-grid">
+      <div class="kpi-box primary">
+        <div class="kpi-badge">Primary KPI — 主要指標</div>
+        <div class="kpi-item">📞 電話來電</div>
+        <div class="kpi-item">📋 表單提交</div>
+        <div class="kpi-item">💬 Facebook 訊息</div>
+        <div class="kpi-item">💬 LINE 訊息</div>
+      </div>
+      <div class="kpi-box secondary">
+        <div class="kpi-badge">Secondary KPI — 輔助指標</div>
+        <div class="kpi-item">🌐 網站總流量</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 預算 × 渠道 ════════ -->
+<section id="budget">
+  <div class="page-inner reveal">
+    <div class="section-label">Budget & Channel Strategy</div>
+    <h2 class="section-title">預算配置 × 渠道策略</h2>
+
+    <div class="channel-row">
+      <div class="channel-card">
+        <div class="channel-percent">60%</div>
+        <div class="channel-name">Google Ads</div>
+        <div class="channel-strategy">
+          <span class="strategy-tag tag-primary">主力 — 關鍵字廣告</span>
+          <span class="strategy-tag tag-secondary">輔助 — 聯播網 / PMax</span>
+          <p style="margin-top:0.8rem;">攔截搜尋意圖明確的潛在客戶，輔以聯播網擴大品牌觸及。</p>
+        </div>
+      </div>
+
+      <div class="channel-card">
+        <div class="channel-percent">30%</div>
+        <div class="channel-name">Meta Ads</div>
+        <div class="channel-strategy">
+          <span class="strategy-tag tag-primary">主力 — 訊息廣告</span>
+          <span class="strategy-tag tag-secondary">輔助 — 流量廣告</span>
+          <p style="margin-top:0.8rem;">透過 Messenger / LINE 導流，直接與潛在客戶建立對話。</p>
+        </div>
+      </div>
+
+      <div class="channel-card">
+        <div class="channel-percent">10%</div>
+        <div class="channel-name">LINE LAP</div>
+        <div class="channel-strategy">
+          <span class="strategy-tag tag-primary">純流量導入</span>
+          <p style="margin-top:0.8rem;">擴大品牌曝光，將流量導入網站與官方帳號。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 主題配置 ════════ -->
+<section id="themes">
+  <div class="page-inner reveal">
+    <div class="section-label">Campaign Themes</div>
+    <h2 class="section-title">主題配置</h2>
+
+    <div class="theme-row">
+      <div class="theme-card">
+        <div class="theme-percent">60%</div>
+        <div class="theme-name">住宅空間</div>
+        <div class="theme-channels">
+          <span class="theme-ch ch-google">Google Ads</span>
+          <span class="theme-ch ch-meta">Meta Ads</span>
+          <span class="theme-ch ch-line">LINE LAP</span>
+        </div>
+      </div>
+
+      <div class="theme-card">
+        <div class="theme-percent">25%</div>
+        <div class="theme-name">商業空間</div>
+        <div class="theme-channels">
+          <span class="theme-ch ch-meta">Meta 主</span>
+          <span class="theme-ch ch-google">Google 輔</span>
+        </div>
+      </div>
+
+      <div class="theme-card">
+        <div class="theme-percent">15%</div>
+        <div class="theme-name">課程講座</div>
+        <div class="theme-channels">
+          <span class="theme-ch ch-meta">Meta 主</span>
+          <span class="theme-ch ch-google">Google 輔</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 時間排期 ════════ -->
+<section id="timeline">
+  <div class="page-inner reveal">
+    <div class="section-label">Timeline & Pacing</div>
+    <h2 class="section-title">時間排期</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">WEEK 1 — 2</div>
+        <div class="tl-title">測試期 — 確認各平台投廣狀況</div>
+        <div class="tl-desc">以日預算 30%～50% 進行 TA 方向測試，驗證受眾設定與素材方向是否正確。</div>
+        <div class="tl-budget-bar"><div class="tl-budget-fill" style="width:40%;"></div></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">WEEK 2 — 4</div>
+        <div class="tl-title">調整期 — 素材疲乏週期評估</div>
+        <div class="tl-desc">將日預算提升至 50%～80%，觀察素材表現衰退週期，進行素材迭代與受眾優化。</div>
+        <div class="tl-budget-bar"><div class="tl-budget-fill" style="width:65%;"></div></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">WEEK 4 — 8</div>
+        <div class="tl-title">穩定期 — 廣告循環性確認</div>
+        <div class="tl-desc">100% 日預算全額投放，確認廣告循環穩定運轉，建立長期可持續的投放節奏。</div>
+        <div class="tl-budget-bar"><div class="tl-budget-fill" style="width:100%;"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CTA ════════ -->
+<section id="cta">
+  <div class="reveal">
+    <div class="cta-slogan">
+      <span class="thin">以簡單的方法</span><br>
+      達成<span class="gold" style="color:var(--gold);">不簡單</span>的成效
+    </div>
+    <div class="cta-divider"></div>
+    <div class="cta-company">簡單廣告營銷</div>
+    <div class="cta-name">Dan 楊旼璋 — Founder</div>
+  </div>
+</section>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => navObserver.observe(s));
+</script>
+
+</body>
+</html>
