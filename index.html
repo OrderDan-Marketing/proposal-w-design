@@ -260,12 +260,11 @@
 
   .kpi-item:last-child { margin-bottom: 0; }
 
-  /* ════════ PAGE 4: 預算 × 渠道 ════════ */
+  /* ════════ PAGE 4: 策略總覽 ════════ */
   .channel-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.2rem;
-    margin-top: 2rem;
   }
 
   @media (max-width: 768px) {
@@ -337,18 +336,6 @@
   .tag-secondary {
     background: rgba(255,255,255,0.05);
     color: var(--text-secondary);
-  }
-
-  /* ════════ PAGE 5: 主題配置 ════════ */
-  .theme-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-    margin-top: 2rem;
-  }
-
-  @media (max-width: 768px) {
-    .theme-row { grid-template-columns: 1fr; }
   }
 
   .theme-card {
@@ -556,8 +543,7 @@
   <a href="#cover" class="active"></a>
   <a href="#premise"></a>
   <a href="#kpi"></a>
-  <a href="#budget"></a>
-  <a href="#themes"></a>
+  <a href="#strategy"></a>
   <a href="#timeline"></a>
   <a href="#cta"></a>
 </nav>
@@ -615,10 +601,10 @@
   </div>
 </section>
 
-<!-- ════════ 預算 × 渠道 ════════ -->
-<section id="budget">
-  <div class="page-inner reveal">
-    <div class="section-label">Budget & Channel Strategy</div>
+<!-- ════════ 策略總覽 ════════ -->
+<section id="strategy">
+  <div class="page-inner reveal" style="max-width:1050px;">
+    <div class="section-label">Budget × Channel × Theme</div>
     <h2 class="section-title">預算配置 × 渠道策略</h2>
 
     <div class="channel-row">
@@ -651,16 +637,14 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ════════ 主題配置 ════════ -->
-<section id="themes">
-  <div class="page-inner reveal">
-    <div class="section-label">Campaign Themes</div>
-    <h2 class="section-title">主題配置</h2>
+    <!-- 主題配置 -->
+    <div style="margin-top:3rem;">
+      <div class="section-label">Campaign Themes</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem;">主題配置</h2>
+    </div>
 
-    <div class="theme-row">
+    <div class="channel-row">
       <div class="theme-card">
         <div class="theme-percent">60%</div>
         <div class="theme-name">住宅空間</div>
