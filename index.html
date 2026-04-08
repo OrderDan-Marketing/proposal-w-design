@@ -19,6 +19,12 @@
     --text-muted: #5e5955;
     --border: rgba(201, 169, 110, 0.1);
     --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #a0814a 100%);
+    --green: #4dd88a;
+    --green-dim: rgba(6, 199, 85, 0.12);
+    --amber: #e2a24e;
+    --amber-dim: rgba(226, 162, 78, 0.12);
+    --red-dim: rgba(220, 80, 80, 0.12);
+    --red: #dc5050;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -141,12 +147,26 @@
   }
   .cover-by span { color: var(--gold); }
 
+  .cover-status {
+    margin-top: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    border: 1px solid var(--amber);
+    background: var(--amber-dim);
+    font-size: 0.8rem;
+    color: var(--amber);
+    animation: fadeUp 0.8s ease 0.7s both;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ════════ PAGE 2: 前提 ════════ */
+  /* ════════ COMMON ════════ */
   .page-inner {
     max-width: 900px;
     width: 100%;
@@ -169,6 +189,77 @@
     line-height: 1.4;
   }
 
+  /* ════════ PAGE 2: 業務進度 ════════ */
+  .progress-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .progress-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    transition: border-color 0.3s;
+  }
+
+  .progress-item:hover { border-color: rgba(201, 169, 110, 0.25); }
+
+  .progress-icon {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    margin-top: 0.1rem;
+  }
+
+  .icon-done { background: var(--green-dim); color: var(--green); }
+  .icon-pending { background: var(--amber-dim); color: var(--amber); }
+  .icon-blocked { background: var(--red-dim); color: var(--red); }
+
+  .progress-content { flex: 1; }
+
+  .progress-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .progress-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .progress-sub {
+    margin-top: 0.6rem;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .progress-sub li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .progress-sub li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+
+  /* ════════ PAGE 3: 前提 ════════ */
   .premise-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -211,16 +302,16 @@
     line-height: 1.8;
   }
 
-  /* ════════ PAGE 3: KPI ════════ */
-  .kpi-grid {
+  /* ════════ PAGE 4: KPI + 渠道策略 (MERGED) ════════ */
+  .merged-top {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin-bottom: 2.5rem;
   }
 
   @media (max-width: 768px) {
-    .kpi-grid { grid-template-columns: 1fr; }
+    .merged-top { grid-template-columns: 1fr; }
   }
 
   .kpi-box {
@@ -260,7 +351,6 @@
 
   .kpi-item:last-child { margin-bottom: 0; }
 
-  /* ════════ PAGE 4: 策略總覽 ════════ */
   .channel-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -310,7 +400,17 @@
   .channel-name {
     font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .channel-kpi {
+    font-size: 0.8rem;
+    color: var(--gold-light);
+    margin-bottom: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--gold-dim);
+    border-radius: 6px;
+    display: inline-block;
   }
 
   .channel-strategy {
@@ -338,6 +438,7 @@
     color: var(--text-secondary);
   }
 
+  /* ════════ PAGE 5: 主題配置 ════════ */
   .theme-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -382,7 +483,95 @@
   .ch-meta { background: rgba(66, 103, 178, 0.15); color: #7b9bd8; }
   .ch-line { background: rgba(6, 199, 85, 0.15); color: #4dd88a; }
 
-  /* ════════ PAGE 6: 時間排期 ════════ */
+  /* ════════ PAGE 6: 素材策略 ════════ */
+  .creative-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .creative-grid { grid-template-columns: 1fr; }
+  }
+
+  .creative-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+
+  .creative-card:hover { border-color: rgba(201, 169, 110, 0.25); }
+
+  .creative-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .creative-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+
+  .creative-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .creative-flow {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .flow-steps {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .flow-step {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .flow-step small {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 0.3rem;
+  }
+
+  .flow-arrow {
+    color: var(--gold);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .flow-steps { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+
+  /* ════════ PAGE 7: 時間排期 ════════ */
   .timeline {
     position: relative;
     margin-top: 2.5rem;
@@ -457,7 +646,7 @@
     transition: width 1s ease;
   }
 
-  /* ════════ PAGE 7: CTA ════════ */
+  /* ════════ PAGE 8: CTA ════════ */
   #cta {
     flex-direction: column;
     text-align: center;
@@ -514,6 +703,8 @@
     .tl-desc { font-size: 1.05rem; }
     .cta-slogan { font-size: 2.6rem; }
     .cta-company { font-size: 1.2rem; }
+    .progress-title { font-size: 1.2rem; }
+    .creative-title { font-size: 1.25rem; }
   }
 
   @media (min-width: 1600px) {
@@ -541,9 +732,9 @@
 
 <nav id="nav">
   <a href="#cover" class="active"></a>
-  <a href="#premise"></a>
-  <a href="#kpi"></a>
+  <a href="#progress"></a>
   <a href="#strategy"></a>
+  <a href="#creative"></a>
   <a href="#timeline"></a>
   <a href="#cta"></a>
 </nav>
@@ -557,35 +748,64 @@
   <div class="cover-type">Digital Advertising Strategy</div>
   <div class="cover-line"></div>
   <div class="cover-by">Presented by <span>簡單廣告營銷</span></div>
+  <div class="cover-status">⏳ 合約待回簽</div>
 </section>
 
-<!-- ════════ 前提 ════════ -->
-<section id="premise">
+<!-- ════════ 業務進度 ════════ -->
+<section id="progress">
   <div class="page-inner reveal">
-    <div class="section-label">Premise</div>
-    <h2 class="section-title">執行前提</h2>
+    <div class="section-label">Project Status</div>
+    <h2 class="section-title">業務進度總覽</h2>
 
-    <div class="premise-card">
-      <div class="premise-num">01</div>
-      <div class="premise-title">第一週確認追蹤代碼完整性</div>
-      <div class="premise-desc">確認 GTM、GA4、Meta Pixel、CAPI、LINE Tag 等追蹤架構的完整串接，確保所有轉換事件正確觸發，為後續數據分析建立可靠基礎。</div>
-    </div>
+    <div class="progress-list">
+      <div class="progress-item">
+        <div class="progress-icon icon-done">✓</div>
+        <div class="progress-content">
+          <div class="progress-title">追蹤代碼埋設</div>
+          <div class="progress-desc">GTM、GA4、Meta Pixel、CAPI、LINE Tag 架構已完成串接。</div>
+        </div>
+      </div>
 
-    <div class="premise-card">
-      <div class="premise-num">02</div>
-      <div class="premise-title">以前期數據為基準，進行優劣對比評估</div>
-      <div class="premise-desc">蒐集並整理現有廣告帳戶與網站流量數據，作為執行後的成效比較基準，所有優化決策皆以數據驅動。</div>
+      <div class="progress-item">
+        <div class="progress-icon icon-pending">⏳</div>
+        <div class="progress-content">
+          <div class="progress-title">數據測試 — 準備執行</div>
+          <div class="progress-desc">等待以下授權完成後即可啟動：</div>
+          <ul class="progress-sub">
+            <li>Meta 粉絲專頁授權 ＆ Meta Ads 企業合作夥伴授權</li>
+            <li>Google Ads 管理員帳號授權</li>
+            <li>網站授權 LINE 網域的資料傳輸</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <div class="progress-icon icon-pending">⏳</div>
+        <div class="progress-content">
+          <div class="progress-title">最終日預算確認</div>
+          <div class="progress-desc">待雙方確認後鎖定每日投放金額。</div>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <div class="progress-icon icon-pending">⏳</div>
+        <div class="progress-content">
+          <div class="progress-title">素材準備</div>
+          <div class="progress-desc">詳見「素材策略」頁。</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ KPI ════════ -->
-<section id="kpi">
-  <div class="page-inner reveal">
-    <div class="section-label">Key Performance Indicators</div>
-    <h2 class="section-title">KPI 定義</h2>
+<!-- ════════ KPI + 渠道策略 + 主題配置 (MERGED) ════════ -->
+<section id="strategy" style="min-height:auto;padding-top:6rem;padding-bottom:6rem;">
+  <div class="page-inner reveal" style="max-width:1050px;">
+    <div class="section-label">KPI × Budget × Channel</div>
+    <h2 class="section-title">KPI 定義 × 預算配置 × 渠道策略</h2>
 
-    <div class="kpi-grid">
+    <!-- KPI -->
+    <div class="merged-top">
       <div class="kpi-box primary">
         <div class="kpi-badge">Primary KPI — 主要指標</div>
         <div class="kpi-item">📞 電話來電</div>
@@ -598,19 +818,13 @@
         <div class="kpi-item">🌐 網站總流量</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ════════ 策略總覽 ════════ -->
-<section id="strategy">
-  <div class="page-inner reveal" style="max-width:1050px;">
-    <div class="section-label">Budget × Channel × Theme</div>
-    <h2 class="section-title">預算配置 × 渠道策略</h2>
-
+    <!-- Channels -->
     <div class="channel-row">
       <div class="channel-card">
         <div class="channel-percent">60%</div>
         <div class="channel-name">Google Ads</div>
+        <div class="channel-kpi">📞 來電 ＆ 📋 表單</div>
         <div class="channel-strategy">
           <span class="strategy-tag tag-primary">主力 — 關鍵字廣告</span>
           <span class="strategy-tag tag-secondary">輔助 — 聯播網 / PMax</span>
@@ -621,6 +835,7 @@
       <div class="channel-card">
         <div class="channel-percent">30%</div>
         <div class="channel-name">Meta Ads</div>
+        <div class="channel-kpi">💬 FB / LINE 訊息</div>
         <div class="channel-strategy">
           <span class="strategy-tag tag-primary">主力 — 訊息廣告</span>
           <span class="strategy-tag tag-secondary">輔助 — 流量廣告</span>
@@ -631,6 +846,7 @@
       <div class="channel-card">
         <div class="channel-percent">10%</div>
         <div class="channel-name">LINE LAP</div>
+        <div class="channel-kpi">🌐 流量導入</div>
         <div class="channel-strategy">
           <span class="strategy-tag tag-primary">純流量導入</span>
           <p style="margin-top:0.8rem;">擴大品牌曝光，將流量導入網站與官方帳號。</p>
@@ -639,9 +855,9 @@
     </div>
 
     <!-- 主題配置 -->
-    <div style="margin-top:3rem;">
+    <div style="margin-top:2.5rem;">
       <div class="section-label">Campaign Themes</div>
-      <h2 class="section-title" style="margin-bottom:1.5rem;">主題配置</h2>
+      <h3 class="section-title" style="font-size:clamp(1.2rem,2.5vw,1.8rem);margin-bottom:1.5rem;">主題配置</h3>
     </div>
 
     <div class="channel-row">
@@ -656,7 +872,7 @@
       </div>
 
       <div class="theme-card">
-        <div class="theme-percent">25%</div>
+        <div class="theme-percent">30%</div>
         <div class="theme-name">商業空間</div>
         <div class="theme-channels">
           <span class="theme-ch ch-meta">Meta 主</span>
@@ -665,12 +881,60 @@
       </div>
 
       <div class="theme-card">
-        <div class="theme-percent">15%</div>
+        <div class="theme-percent">10%</div>
         <div class="theme-name">課程講座</div>
         <div class="theme-channels">
           <span class="theme-ch ch-meta">Meta 主</span>
           <span class="theme-ch ch-google">Google 輔</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 素材策略 ════════ -->
+<section id="creative">
+  <div class="page-inner reveal">
+    <div class="section-label">Creative Strategy</div>
+    <h2 class="section-title">素材策略</h2>
+
+    <div class="creative-grid">
+      <div class="creative-card">
+        <div class="creative-label">Format</div>
+        <div class="creative-title">一圖二型</div>
+        <div class="creative-desc">每張精選作品圖產出兩種版本：<br>① 純浮水印版 — 乾淨視覺<br>② 帶風格主標版 — 強化風格辨識</div>
+      </div>
+
+      <div class="creative-card">
+        <div class="creative-label">Source</div>
+        <div class="creative-title">圖片來源</div>
+        <div class="creative-desc">優先使用帶浮水印之圖庫進行選圖，確認可用後再進行後製作業。</div>
+      </div>
+
+      <div class="creative-card">
+        <div class="creative-label">Volume — Meta & LINE</div>
+        <div class="creative-title">Meta / LINE 素材量</div>
+        <div class="creative-desc">初期維持 6～8 組素材同步測試效益，依數據表現進行迭代汰換。</div>
+      </div>
+
+      <div class="creative-card">
+        <div class="creative-label">Volume — Google</div>
+        <div class="creative-title">Google 素材量</div>
+        <div class="creative-desc">Google Ads 以關鍵字為主力，無高頻素材更換需求。</div>
+      </div>
+    </div>
+
+    <!-- 素材產出流程 -->
+    <div class="creative-flow">
+      <div class="creative-label" style="margin-bottom:1rem;">Production Flow</div>
+      <div class="flow-steps">
+        <div class="flow-step">萬寶隆<small>選出風格大類代表圖</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">簡單廣告<small>從剩餘視覺找特色作品</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">萬寶隆<small>為特色作品下風格定義</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">上線投放<small>一圖二型產出</small></div>
       </div>
     </div>
   </div>
